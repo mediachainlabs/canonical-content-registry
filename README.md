@@ -1,29 +1,35 @@
 #Mine Canonical Content Registry
 
-In computer science, data that has more than one possible representation can often be canonicalized into a completely unique representation called its canonical form. In the context of media, two images that are visually identical to human perception can exist in different digital representations, such as a JPG or a PNG. These two files each have a distinct cryptographic identifier (SHA), but are represented by an identical canonical identifier in the Canonical Content Registry. The Canonical Content Registry provides a single identifier for an original idea and points to different instance incarnations of that idea.
+## Summary
 
-Examples:
+In computer science, data that has more than one possible representation can often be reduced to a single unique representation called its canonical form.
 
-Da Vinci's "Mona Lisa" is an original idea with different incarnations such as a JPG on nytimes.com and a PNG on the Louvre's website.
+Digital media, like images, always exist in different representations on the internet. The same photograph can be represented by many JPGs and PNGs of various compression and resolution. All of these instances have distinct digital fingerprints (md5 or sha256), but all represent a canonical "idea".
+
+ The Canonical Content Registry allows registering a unique global identifier representing a canonical "idea" to function as a hook for persistent metadata for instances of digital media.
+
+### Examples:
+
+Da Vinci's "Mona Lisa" is an original idea with different incarnations as a JPG on The New York Times website and a PNG on the Louvre's website.
 
 ![Different instances of the Mona Lisa resolve to the same Canonical Content ID](http://i.imgur.com/SRrFYJU.jpg)
 
 ```javascript
-  {
-    id: "de305d54-75b4-431b-adb2-eb6b9e546013",
-    author: "Leonardo Da Vinci",
-    name: "Mona Lisa",
-    type: "image",
-    instances: [{
-      origin: "http://www.louvre.fr/mona-lisa",
-      url: "http://cdn.louvre.fr/mona-lisa-600x400.png",
-      sha256: "79aef731091472c4395b63b32b2c00c919b9d9538dc1c990381cc8c4609fe9f8"
-    },{
-      origin: "http://www.nytimes.com/2006/09/27/arts/design/27mona.html",
-      url: "http://graphics8.nytimes.com/images/2006/09/27/arts/27mona_CA1.190.jpg",
-      sha256: "fe604b037ec42e6b9273e141b941986bf13fe29fc9d8f8ab3c0ea8ad6989c303"
-    }]
-  }
+{
+  id: "de305d54-75b4-431b-adb2-eb6b9e546013",
+  author: "Leonardo Da Vinci",
+  name: "Mona Lisa",
+  type: "image",
+  instances: [{
+    origin: "http://www.louvre.fr/mona-lisa",
+    url: "http://cdn.louvre.fr/mona-lisa-600x400.png",
+    sha256: "79aef731091472c4395b63b32b2c00c919b9d9538dc1c990381cc8c4609fe9f8"
+  },{
+    origin: "http://www.nytimes.com/2006/09/27/arts/design/27mona.html",
+    url: "http://graphics8.nytimes.com/images/2006/09/27/arts/27mona_CA1.190.jpg",
+    sha256: "fe604b037ec42e6b9273e141b941986bf13fe29fc9d8f8ab3c0ea8ad6989c303"
+  }]
+}
 ```
 
 Michael Jackson's "Beat It" is an original idea with different incarnations as a YouTube video, Spotify link, or a torrent.
@@ -31,32 +37,32 @@ Michael Jackson's "Beat It" is an original idea with different incarnations as a
 ![Different instances of the Beat It resolve to the same Canonical Content ID](http://i.imgur.com/NTENEB8.jpg)
 
 ```javascript
-  {
-    id: "a3cfcc58-19b2-4c0c-b474-6cc7046f4192",
-    author: "Michael Jackson",
-    name: "Beat It",
-    type: "music",
-    instances: [{
-      url: "www.youtube.com/watch?v=Ym0hZG-zNOk"
-    },{
-      url: "https://open.spotify.com/track/3BovdzfaX4jb5KFQwoPfAw",
-    }]
-  }
+{
+  id: "a3cfcc58-19b2-4c0c-b474-6cc7046f4192",
+  author: "Michael Jackson",
+  name: "Beat It",
+  type: "music",
+  instances: [{
+    url: "www.youtube.com/watch?v=Ym0hZG-zNOk"
+  },{
+    url: "https://open.spotify.com/track/3BovdzfaX4jb5KFQwoPfAw",
+  }]
+}
 ```
 
 While music is not a primary use case for Mine, an example is provided to illustrate that the Canonical Content Registry is media-type agnostic.
 
 ##Problem
 
-The discrete nature of digital media allows content to be represented in infinite forms suitible for delivery to the end user. Media is constantly changing encoding format, compression, and resolution as it propogates various channels of the internet. Compression algorithms are primarily concerned with perceptual integrity of media relevant to human vision: preservation of embedded metadata formats such as Exif is optional. There is no reliable way persist metadata for digital media as it is organically shared online.
+The discrete nature of digital media allows content to be represented in infinite forms suitible for delivery to the end user. Media is constantly changing encoding format, compression, and resolution as it propogates various channels of the internet. Compression algorithms are primarily concerned with perceptual integrity of media relevant to human vision so preservation of embedded metadata such as Exif data is optional. *There is no reliable way persist metadata for digital media as it is organically shared online.*
 
-As a consequence, creators and consumers rely on centralized media platforms to provide explicit metadata. For example, a photograph on the front page of the New York Times website has an explicit text attribution and annotation below it, a post on Twitter has an explicit username next to it, etc. Other explicit metadata can be context: an image published on a Tumblr blog exists within the context of other posts on that blog.
+As a consequence, creators and consumers rely on centralized media platforms to provide explicit metadata. For example, a photograph on the front page of the New York Times website has an explicit text attribution and annotation below it and a post on Twitter has an explicit username next to it. Other explicit metadata can be context: an image published on a Tumblr blog exists within the context of other images on that blog.
 
-Once native sharing mechanisms such as drag and drop, copy and paste, or screenshot are used by consumers to share media, explicit metadata like attribution and context is detached from the media and is difficult or impossible to recover. Creators cannot derive value from the subsequent virality of their works because it isn't possible to discover their identity. Consumers cannot have rich interactions with the media because their interactions with the media, such as annotation or curation (pinning, collecting, commenting, etc), are not persistent across platforms.
+As users of social platforms use native sharing mechanisms like drag and drop, copy and paste, and screenshot to share media, explicit metadata like attribution and context is detached from the media and is difficult or impossible to recover. Creators cannot derive value from the subsequent virality of their works because it isn't possible to discover their identity. Consumers are disenfranchised as well because they cannot have rich interactions with the media. Their actions of annotation or curation (pinning, collecting, commenting, etc) are only visible on centralized platforms and are not persistent or discoverable across platforms.
 
 ##Proposal
 
-In order to make metadata for media persistent, it is necessary to have a single global identifier that represents the "idea" of an original work. Any instance of the idea (e.g. a 600x400 72dpi JPG or a 30 Megapixel RAW file) should resolve to the global identifier representing the "idea". The human visual apparatus can easily recognize near duplicate images and intuitively and confidently infer that very similar incarnations (e.g. the same photograph on a billboard, in a magazine, and on a postcard) actually represent the same "idea". The visual apparatus abstracts the physical differences of the each so that the three instances can be considered to be of one photograph ("idea").
+In order to make metadata for media persistent, it is necessary to have a single global identifier that represents the "idea" of an original work. Any instance of the idea (e.g. a 600x400 72dpi JPG or a 30 Megapixel RAW file) should resolve to the global identifier representing the "idea". The human visual apparatus can easily recognize near duplicate images and intuitively and confidently infer that very similar incarnations (e.g. the same photograph on a billboard, in a magazine, and on a postcard) actually represent the same "idea". The visual apparatus abstracts the physical differences of each so that the three instances can be considered to be of one photograph ("idea").
 
 ![Human Vision](http://i.imgur.com/xKJmgTB.jpg)
 
@@ -64,9 +70,9 @@ To emulate the human visual apparatus, we can use feature detection techniques i
 
 ![Computer Vision](http://i.imgur.com/vc0sd5Y.jpg)
 
-By building a global content registry on top of the Bitcoin blockchain (for timestamped proof of data integrity) using a DHT (for metadata volume scalability), we can specify a protocol to globally register canonical representations of digital media. Using computer vision techniques, the system can resolve various instances of an image to its canonical representation. Just like reverse image search or Shazam, computer vision will enable real time querying for image registrations in the blockchain, returning a global identifier to which various metadata can be later appended to.
+By building a global content registry on top of the Bitcoin blockchain (for timestamped proof of data integrity) using a DHT (for metadata volume scalability), we can specify a protocol to globally register canonical representations of digital media. Using computer vision techniques, the system can resolve various instances of an image to its canonical representation. Just like reverse image search or Shazam, computer vision will enable real time queries for image registrations timestamped with the blockchain, returning a global identifier to which various metadata can be later appended to.
 
-Because the global identifier can be derived wherever the image exists, metadata becomes globally retrievable, therefore persistent and open. Anyone can read and write metadata.
+Because the global identifier can be derived anywhere an image exists, metadata becomes globally retrievable, therefore persistent and open. Anyone can read and write metadata.
 
 Application layers relevant to various metadata can be built on top of the content registry. Some obvious applications are attribution and ability to retrieve digital media.
 
@@ -75,14 +81,14 @@ Application layers relevant to various metadata can be built on top of the conte
 In order to register a canonical unit of content, one generates a unique identifier for the content and assigns a content instance to it:
 
 ```javascript
-  {
-    id: "de305d54-75b4-431b-adb2-eb6b9e546013",
-    type: "image",
-    "instances": [
-      url: "http://i.imgur.com/R6chj3Y.jpg",
-      sha256: "79aef731091472c4395b63b32b2c00c919b9d9538dc1c990381cc8c4609fe9f8"
-    ]
-  }
+{
+  id: "de305d54-75b4-431b-adb2-eb6b9e546013",
+  type: "image",
+  instances: [{
+    url: "http://i.imgur.com/R6chj3Y.jpg",
+    sha256: "79aef731091472c4395b63b32b2c00c919b9d9538dc1c990381cc8c4609fe9f8"
+  }]
+}
 ```
 
 ##Lookup
@@ -91,15 +97,15 @@ Like the [ONS-resolver](https://github.com/openname/resolver), a Canonical Conte
 
 ##Attribution
 
-One important layer on top of the Canonical Content Registry is attribution. Lack of attribution for media, especially images, is an enormous problem for creators on current media platforms. Unattributed content accounts for a majority of the content shared on platforms such as Pinterest and Tumblr, and there is no way for consumers to discover the creator or origin of the image. By making the Canonical Content Identifier discoverable by virtue of seeing an image, attribution will be one type of metadata that is persistent wherever the  image exists. Discovering the attribution can be initiated by an action from the user (via browser or app extension), and can also be integrated with major image-sharing platforms. This will be highly beneficial to creators because they will be able to drive the value of their content propogating the network back to an identity they own and control ([Openname](https://openname.org/)), not to the centralized platform.
+One important layer on top of the Canonical Content Registry is attribution. Lack of attribution for media, especially images, is an enormous problem for creators on current media platforms. Unattributed content accounts for a majority of the content shared on platforms such as Pinterest and Tumblr, and there is no way for consumers to discover the creator or origin of the image. By making the Canonical Content Identifier discoverable by virtue of seeing an image, attribution will be one type of metadata that is persistent wherever the image exists. Discovering the attribution can be initiated by an action from the user (via browser or app extension), and can also be integrated with major image-sharing platforms. This will be highly beneficial to creators because they will be able to drive the value of their content propogating the network back to an identity they own and control ([Openname](https://openname.org/)), not to the centralized platform.
 
 ###Nametags
 
-Because it is impossible to tell the age of a digital file, a decentralized attribution registry faces the problem of accounting for a trove of legacy content. Any user can potentially claim ownership of any digital file. We propose specifying a Canonical Creator Identifier, called a nametag. A nametag has no owner or maintainer, it is simply a global identifier used to associate canonical content identifiers with canonical creator identifiers. For example, the `*pablopicasso` nametag can be used by the community to tag all Pablo Picasso paintings on the internet. Similarly, photographs by Terry Richardson can be tagged `*terryrichardson`. Unlike Picasso, Terry Richardson is a living artist that could potentially join the decentralized content community by creating an Openname profile. It would be useful if a nametag can be decorated by an actual user profile that can be interacted with by the community.
+Because it is impossible to tell the age of a digital file, a decentralized attribution registry faces the problem of accounting for a trove of legacy content. Any user can potentially claim ownership of any digital file. We propose specifying a *Canonical Creator Identifier*, called a nametag. A nametag has no owner or maintainer, it is simply a global identifier used to associate canonical content identifiers with the idea of a creator. For example, the `*pablopicasso` nametag can be used by the community to tag all Pablo Picasso paintings in existance. Similarly, photographs by Annie Leibovitz can be tagged `*annieleibovitz`. Unlike Picasso, Annie Leibovitz is a living artist that could potentially join the decentralized content community by creating an Openname identity. It would be useful if a nametag could be decorated by an actual user profile that can be interacted with by the community.
 
 ###Decorating a nametag
 
-A nametag can be decorated with an Openname profile with the aid of a simplistic reputation system. The community will sign statements saying the user possesing the `+terryrichardson` Openname profile is the same creator represented by the `*terryrichardson` nametag (statements are part of the Openname [specification](https://github.com/openname/specifications/blob/master/profiles/profiles-v03.md)). After sufficient reputation is present, the nametag can easily route to the profile on the application level. The consumer user experience will alias the nametag to the profile, making the experience feel like the discovery of an image leads to the discovery of the creator's user account, where they can interact directly.
+A nametag can be decorated with an Openname profile with the aid of a simple reputation system. The community will sign statements saying the user possesing the `+annieleibovitz` Openname profile is the same creator represented by the `*annieleibovitz` nametag (statements are part of the Openname [specification](https://github.com/openname/specifications/blob/master/profiles/profiles-v03.md)). After sufficient reputation is present, the nametag can route to the profile on the application level. The consumer user experience will alias the nametag to the profile, making the experience feel like the discovery of an image leads to the discovery of the creator's user account, where they can interact directly.
 
 ###Decentralized attribution
 
