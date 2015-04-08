@@ -10,7 +10,7 @@ Digital media, like images, always exist in different representations on the int
 
 ### Examples:
 
-Da Vinci's "Mona Lisa" is an original idea with different incarnations as a JPG on The New York Times website and a PNG on the Louvre's website.
+Da Vinci's "Mona Lisa" is an original idea with different incarnations as a JPG on the New York Times' website and a PNG on the Louvre's website.
 
 ![Different instances of the Mona Lisa resolve to the same Canonical Content ID](http://i.imgur.com/SRrFYJU.jpg)
 
@@ -54,7 +54,7 @@ While music is not a primary use case for Mine, an example is provided to illust
 
 ##Problem
 
-The discrete nature of digital media allows content to be represented in infinite forms suitible for delivery to the end user. Media is constantly changing encoding format, compression, and resolution as it propogates various channels of the internet. Compression algorithms are primarily concerned with perceptual integrity of media relevant to human vision so preservation of embedded metadata such as Exif data is optional. *There is no reliable way persist metadata for digital media as it is organically shared online.*
+The discrete nature of digital media allows content to be represented in infinite forms suitible for delivery to the end user. Media is constantly changing encoding format, compression, and resolution as it propogates various channels of the internet. Compression algorithms are primarily concerned with perceptual integrity of media relevant to human vision so preservation of embedded metadata such as Exif data is optional. *There is no reliable way to persist metadata for digital media as it is organically shared online.*
 
 As a consequence, creators and consumers rely on centralized media platforms to provide explicit metadata. For example, a photograph on the front page of the New York Times website has an explicit text attribution and annotation below it and a post on Twitter has an explicit username next to it. Other explicit metadata can be context: an image published on a Tumblr blog exists within the context of other images on that blog.
 
@@ -62,7 +62,9 @@ As users of social platforms use native sharing mechanisms like drag and drop, c
 
 ##Proposal
 
-In order to make metadata for media persistent, it is necessary to have a single global identifier that represents the "idea" of an original work. Any instance of the idea (e.g. a 600x400 72dpi JPG or a 30 Megapixel RAW file) should resolve to the global identifier representing the "idea". The human visual apparatus can easily recognize near duplicate images and intuitively and confidently infer that very similar incarnations (e.g. the same photograph on a billboard, in a magazine, and on a postcard) actually represent the same "idea". The visual apparatus abstracts the physical differences of each so that the three instances can be considered to be of one photograph ("idea").
+In order to make metadata for media persistent, it is necessary to have a single global identifier that represents the "idea" of an original work. Any instance of the idea (e.g. a 600x400 72dpi JPG or a 30 Megapixel RAW file) should resolve to the global identifier representing the "idea".
+
+The human visual apparatus can easily recognize near duplicate images and intuitively and confidently infer that very similar incarnations (e.g. the same photograph on a billboard, in a magazine, and on a postcard) actually represent the same "idea". The visual apparatus abstracts the physical differences of each so that the three instances can be considered to be of one photograph ("idea").
 
 ![Human Vision](http://i.imgur.com/xKJmgTB.jpg)
 
@@ -70,11 +72,11 @@ To emulate the human visual apparatus, we can use feature detection techniques i
 
 ![Computer Vision](http://i.imgur.com/vc0sd5Y.jpg)
 
-By building a global content registry on top of the Bitcoin blockchain (for timestamped proof of data integrity) using a DHT (for metadata volume scalability), we can specify a protocol to globally register canonical representations of digital media. Using computer vision techniques, the system can resolve various instances of an image to its canonical representation. Just like reverse image search or Shazam, computer vision will enable real time queries for image registrations timestamped with the blockchain, returning a global identifier to which various metadata can be later appended to.
+By building a global content registry on top of the Bitcoin blockchain (for timestamped proof of data integrity) using a DHT (for metadata volume scalability), we can specify a protocol to globally register canonical representations of digital media. Using computer vision techniques, the system can resolve various instances of an image to its canonical representation. Just like reverse image search or Shazam, computer vision will enable real time queries for image registrations timestamped with the blockchain, returning a global identifier to which various metadata can be appended to.
 
 Because the global identifier can be derived anywhere an image exists, metadata becomes globally retrievable, therefore persistent and open. Anyone can read and write metadata.
 
-Application layers relevant to various metadata can be built on top of the content registry. Some obvious applications are attribution and ability to retrieve digital media.
+Application layers relevant to various metadata can be built on top of the content registry. Some obvious applications are attribution and the ability to retrieve digital media.
 
 ##Registration
 
@@ -101,7 +103,9 @@ One important layer on top of the Canonical Content Registry is attribution. Lac
 
 ###Nametags
 
-Because it is impossible to tell the age of a digital file, a decentralized attribution registry faces the problem of accounting for a trove of legacy content. Any user can potentially claim ownership of any digital file. We propose specifying a *Canonical Creator Identifier*, called a nametag. A nametag has no owner or maintainer, it is simply a global identifier used to associate canonical content identifiers with the idea of a creator. For example, the `*pablopicasso` nametag can be used by the community to tag all Pablo Picasso paintings in existance. Similarly, photographs by Annie Leibovitz can be tagged `*annieleibovitz`. Unlike Picasso, Annie Leibovitz is a living artist that could potentially join the decentralized content community by creating an Openname identity. It would be useful if a nametag could be decorated by an actual user profile that can be interacted with by the community.
+Because it is impossible to tell the age of a digital file, a decentralized attribution registry faces the problem of accounting for a trove of legacy content. Any user can potentially claim ownership of any digital file. We propose specifying a *Canonical Creator Identifier*, called a nametag. A nametag has no owner or maintainer, it is simply a global identifier used to associate canonical content identifiers with the idea of a creator. For example, the `*pablopicasso` nametag can be used by the community to tag all Pablo Picasso paintings in existence. Similarly, photographs by Annie Leibovitz can be tagged `*annieleibovitz`.
+
+Unlike Pablo Picasso, Annie Leibovitz is a living artist that could potentially join the decentralized content community by creating an Openname identity. It would be useful if a nametag could be decorated by an actual user profile that can be interacted with by the community.
 
 ###Decorating a nametag
 
