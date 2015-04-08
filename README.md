@@ -43,14 +43,14 @@ Michael Jackson's "Beat It" is an original idea with different incarnations as a
   name: "Beat It",
   type: "music",
   instances: [{
-    url: "www.youtube.com/watch?v=Ym0hZG-zNOk"
+    url: "http://www.youtube.com/watch?v=Ym0hZG-zNOk"
   },{
     url: "https://open.spotify.com/track/3BovdzfaX4jb5KFQwoPfAw",
   }]
 }
 ```
 
-While music is not a primary use case for Mine, an example is provided to illustrate that the Canonical Content Registry is media-type agnostic.
+The Canonical Content Registry is media-type agnostic.
 
 ##Problem
 
@@ -78,6 +78,16 @@ Because the global identifier can be derived anywhere an image exists, metadata 
 
 Application layers relevant to various metadata can be built on top of the content registry. Some obvious applications are attribution and the ability to retrieve digital media.
 
+![Hypermedia Application Stack](http://i.imgur.com/cCFwxvK.jpg)
+
+Diagram based on Joel Monegro's [Blockchain Application Stack](http://joel.mn/post/103546215249/the-blockchain-application-stack)
+
+#### Existing global media identifiers
+While examples of global media identifiers exist, they have been exclusively used in proprietary databases with no protocol specification for open consumption and collaboration. Or, the standards don't provide a way to link many instances of digital media to a single identifier (a limitation of Magnet links).
+
+- [International Standard Recording Code](http://en.wikipedia.org/wiki/International_Standard_Recording_Code)
+- [Magnet URI scheme](http://en.wikipedia.org/wiki/Magnet_URI_scheme)
+
 ##Registration
 
 In order to register a canonical unit of content, one generates a unique identifier for the content and assigns a content instance to it:
@@ -99,7 +109,7 @@ Like the [ONS-resolver](https://github.com/openname/resolver), a Canonical Conte
 
 ##Attribution
 
-One important layer on top of the Canonical Content Registry is attribution. Lack of attribution for media, especially images, is an enormous problem for creators on current media platforms. Unattributed content accounts for a majority of the content shared on platforms such as Pinterest and Tumblr, and there is no way for consumers to discover the creator or origin of the image. By making the Canonical Content Identifier discoverable by virtue of seeing an image, attribution will be one type of metadata that is persistent wherever the image exists. Discovering the attribution can be initiated by an action from the user (via browser or app extension), and can also be integrated with major image-sharing platforms. This will be highly beneficial to creators because they will be able to drive the value of their content propogating the network back to an identity they own and control ([Openname](https://openname.org/)), not to the centralized platform.
+One important layer on top of the Canonical Content Registry is attribution. Lack of attribution for media, especially images, is an enormous problem for creators on current media platforms. Unattributed content accounts for a majority of the content shared on platforms such as Pinterest and Tumblr, and there is no way for consumers to discover the creator or origin of the image. By making the Canonical Content Identifier discoverable by virtue of seeing an image, attribution will be one type of metadata that is persistent wherever the image exists. Discovering the attribution can be initiated by an action from the user, and can also be integrated with major image-sharing platforms. This will be highly beneficial to creators because they will be able to drive the value of their content propogating the network back to an identity they own and control ([Openname](https://openname.org/)), not to the centralized platform.
 
 ###Nametags
 
@@ -107,13 +117,13 @@ Because it is impossible to tell the age of a digital file, a decentralized attr
 
 Unlike Pablo Picasso, Annie Leibovitz is a living artist that could potentially join the decentralized content community by creating an Openname identity. It would be useful if a nametag could be decorated by an actual user profile that can be interacted with by the community.
 
-###Decorating a nametag
+####Decorating a nametag
 
 A nametag can be decorated with an Openname profile with the aid of a simple reputation system. The community will sign statements saying the user possesing the `+annieleibovitz` Openname profile is the same creator represented by the `*annieleibovitz` nametag (statements are part of the Openname [specification](https://github.com/openname/specifications/blob/master/profiles/profiles-v03.md)). After sufficient reputation is present, the nametag can route to the profile on the application level. The consumer user experience will alias the nametag to the profile, making the experience feel like the discovery of an image leads to the discovery of the creator's user account, where they can interact directly.
 
 ###Decentralized attribution
 
-The Canonical Content Identifier becomes a hook for attaching nametags, and nametags become a hook for attaching a decentralized identity. Reputation is a necessary element because there is no centralized entity to vouch for correctness of attribution, and it is up to the community to sign statements to "vote up" a nametag for an image, and an identity for a nametag.
+The Canonical Content Identifier becomes a hook for attaching nametags, and nametags become a hook for attaching a decentralized identity. Reputation is a necessary element because there is no centralized entity to vouch for correctness of attribution, and it is up to the community to sign statements to "vote up" a nametag for an image, and an identity for a nametag (see [Question 1](#q1)).
 
 ##Blockstore
 
@@ -132,5 +142,5 @@ Based on discussion with @shea256 and @muneeb-ali, we have outlined the followin
 
 ####Questions
 
-1. How to avoid sybil attacks without high transaction costs?
+1. <a name="q1"></a>How to avoid sybil attacks on writing metadata to DHT, tagging with nametag, and signing statements without high transaction costs?
 
