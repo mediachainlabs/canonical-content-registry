@@ -1,4 +1,4 @@
-#Mine Canonical Content Registry
+#Canonical Content Registry
 
 ## Summary
 
