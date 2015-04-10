@@ -144,3 +144,6 @@ Based on discussion with @shea256 and @muneeb-ali, we have outlined the followin
 
 1. <a name="q1"></a>How to avoid sybil attacks on writing metadata to DHT, tagging with nametag, and signing statements without high transaction costs?
 
+## About
+This project is an initiative by [Mine](http://www.mine.nyc), whose goal is to identify every image on the internet.
+
