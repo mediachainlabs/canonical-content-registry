@@ -1,3 +1,5 @@
+CANONICAL CONTENT REGISTRY IS DEPRECATED IN FAVOR OF [MEDIACHAIN](https://github.com/mediachain/mediachain).
+
 #Canonical Content Registry
 
 ## Summary
